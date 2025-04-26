@@ -11,7 +11,10 @@ export const TodoList = () => {
   };
 
   const toggleCheck = (id) => {
-    // Fix the app to mark a task as completed
+    const updatedTodos = todos.map((todo) => (
+      todo.id === id ? { ...todo, checked: !todo.checked } : todo
+    ));
+    setTodos(updatedTodos);
   };
 
   const handleKeyUp = (e, id) => {
