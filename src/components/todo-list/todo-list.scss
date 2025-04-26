@@ -1,19 +1,22 @@
 .todo-list {
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(1,1,1,0.1);
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
 
   &-title {
+    color: #666;
+    font-size: 14px;
     font-weight: 500;
-    font-size: 18px;
-    text-transform: uppercase;
-    text-align: center;
-    display: block;
-    border-bottom: 1px solid rgba(1,1,1,0.1);
-    padding: 5px 0;
-    margin-bottom: 10px;
+    padding: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   &-content {
+    padding: 8px 0;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,8 +28,9 @@
 }
 
 .no-todos {
+  color: #666;
   text-align: center;
-  padding: 5px 0;
+  padding: 32px 16px;
   font-size: 14px;
-  color: gray;
+  font-style: italic;
 }
