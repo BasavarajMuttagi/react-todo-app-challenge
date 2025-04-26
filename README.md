@@ -20,14 +20,14 @@ Your goal is to fix the issues listed below and implement a few enhancements. Yo
 
 You will be required to do the following:
 
-- [ ] **Fix the app to display a list of all tasks**
-- [ ] **Fix the layout** so checkboxes are properly listed in a column
-- [ ] **Fix the app to allow adding a new task**
-- [ ] **Fix the functionality to mark a task as completed**
-- [ ] **Fix the functionality to delete a task**
-- [ ] **Fix the count of completed tasks**
-- [ ] Add a **search feature** to filter tasks
-- [ ] **Add a filter button** to view:
+- [x] **Fix the app to display a list of all tasks**
+- [x] **Fix the layout** so checkboxes are properly listed in a column
+- [x] **Fix the app to allow adding a new task**
+- [x] **Fix the functionality to mark a task as completed**
+- [x] **Fix the functionality to delete a task**
+- [x] **Fix the count of completed tasks**
+- [x] Add a **search feature** to filter tasks
+- [x] **Add a filter button** to view:
   - Only completed tasks
   - Only incomplete tasks
   - All tasks
@@ -38,9 +38,9 @@ You will be required to do the following:
 
 These are optional but appreciated:
 
-- [ ] Implement **pagination** or **lazy-loading** if the list has more than 10 items
+- [x] Implement **pagination** or **lazy-loading** if the list has more than 10 items
 - [ ] Write **test cases** (Jest + React Testing Library preferred)
-- [ ] Improve UI/UX or layout
+- [x] Improve UI/UX or layout
 - [ ] Add **accessibility enhancements**
 - [ ] Create additional views (like task detail or edit mode)
 
