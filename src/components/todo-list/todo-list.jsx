@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Checkbox } from '../checkbox';
+import { TodoSearch } from '../todo-search';
 import { TodosContext } from '../../todo-context';
 import './todo-list.scss';
 
 export const TodoList = () => {
   const { todos, setTodos } = React.useContext(TodosContext);
+  const [searchTerm, setSearchTerm] = React.useState('');
 
   const handleDelete = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
@@ -12,9 +14,10 @@ export const TodoList = () => {
   };
 
   const toggleCheck = (id) => {
-    const updatedTodos = todos.map((todo) => (
-      todo.id === id ? { ...todo, checked: !todo.checked } : todo
-    ));
+    const updatedTodos = todos.map((todo) => ({
+      ...todo,
+      checked: todo.id === id ? !todo.checked : todo.checked,
+    }));
     setTodos(updatedTodos);
   };
 
@@ -24,12 +27,23 @@ export const TodoList = () => {
     }
   };
 
+  const filteredTodos = React.useMemo(() => {
+    if (!searchTerm) {
+      return todos;
+    }
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    return todos.filter((todo) => (
+      todo.label.toLowerCase().includes(lowerSearchTerm)
+    ));
+  }, [todos, searchTerm]);
+
   return (
     <div className="todo-list">
+      <TodoSearch onSearch={setSearchTerm} />
       <span className="todo-list-title">Things to do:</span>
-      {todos.length ? (
+      {filteredTodos.length ? (
         <div className="todo-list-content">
-          {todos.map((todoItem) => (
+          {filteredTodos.map((todoItem) => (
             <Checkbox
               key={todoItem.id}
               label={todoItem.label}
@@ -41,7 +55,11 @@ export const TodoList = () => {
           ))}
         </div>
       ) : (
-        <div className="no-todos">Looks like you&apos;re up for a challenge!</div>
+        <div className="no-todos">
+          {todos.length
+            ? 'No matching tasks found'
+            : 'Looks like you&apos;re up for a challenge!'}
+        </div>
       )}
     </div>
   );

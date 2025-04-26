@@ -1,0 +1,26 @@
+.todo-search {
+  padding: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  input {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    transition: all 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #1e90ff;
+      box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
+    }
+
+    &::placeholder {
+      color: #999;
+    }
+  }
+}
