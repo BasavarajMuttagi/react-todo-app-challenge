@@ -7,7 +7,15 @@ export const TodoForm = () => {
   const [task, setTask] = React.useState('');
 
   const handleAddTodo = () => {
-    // Fix the app to display list of all tasks
+    if (task.trim()) {
+      const newTodo = {
+        id: todos.length ? Math.max(...todos.map((t) => t.id)) + 1 : 0,
+        label: task.trim(),
+        checked: false,
+      };
+      setTodos([...todos, newTodo]);
+      setTask('');
+    }
   };
 
   const handleKeyUp = (e) => {
@@ -24,7 +32,11 @@ export const TodoForm = () => {
         onChange={(e) => setTask(e.target.value)}
         onKeyUp={handleKeyUp}
       />
-      <button type="button" onClick={handleAddTodo}>
+      <button
+        type="button"
+        onClick={handleAddTodo}
+        disabled={!task.trim()}
+      >
         Add task
       </button>
     </div>
