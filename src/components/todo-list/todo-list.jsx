@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { Checkbox } from '../checkbox';
 import { TodoSearch } from '../todo-search';
+import { TodoFilter } from '../todo-filter';
 import { TodosContext } from '../../todo-context';
 import './todo-list.scss';
 
 export const TodoList = () => {
   const { todos, setTodos } = React.useContext(TodosContext);
   const [searchTerm, setSearchTerm] = React.useState('');
+  const [activeFilter, setActiveFilter] = React.useState('all');
 
   const handleDelete = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
@@ -28,18 +30,33 @@ export const TodoList = () => {
   };
 
   const filteredTodos = React.useMemo(() => {
-    if (!searchTerm) {
-      return todos;
+    let filtered = todos;
+
+    // Apply status filter
+    if (activeFilter === 'completed') {
+      filtered = filtered.filter((todo) => todo.checked);
+    } else if (activeFilter === 'active') {
+      filtered = filtered.filter((todo) => !todo.checked);
     }
-    const lowerSearchTerm = searchTerm.toLowerCase();
-    return todos.filter((todo) => (
-      todo.label.toLowerCase().includes(lowerSearchTerm)
-    ));
-  }, [todos, searchTerm]);
+
+    // Apply search filter
+    if (searchTerm) {
+      const lowerSearchTerm = searchTerm.toLowerCase();
+      filtered = filtered.filter((todo) => (
+        todo.label.toLowerCase().includes(lowerSearchTerm)
+      ));
+    }
+
+    return filtered;
+  }, [todos, searchTerm, activeFilter]);
 
   return (
     <div className="todo-list">
       <TodoSearch onSearch={setSearchTerm} />
+      <TodoFilter
+        activeFilter={activeFilter}
+        onFilterChange={setActiveFilter}
+      />
       <span className="todo-list-title">Things to do:</span>
       {filteredTodos.length ? (
         <div className="todo-list-content">
